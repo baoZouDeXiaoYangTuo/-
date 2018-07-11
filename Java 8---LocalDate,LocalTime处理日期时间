@@ -1,0 +1,89 @@
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.TemporalAdjusters;
+import java.util.Calendar;
+ 
+/**
+ * Created by lightClouds917
+ * Date 2017/11/6
+ * Description:Java8中处理时间和日期的类
+ *
+ SQL  -> Java
+ --------------------------
+ date -> LocalDate
+ time -> LocalTime
+ timestamp -> LocalDateTime
+ */
+public class DateTest2 {
+    public static void main(String[] args){
+        test1();
+        test2();
+ 
+        Calendar calendar = Calendar.getInstance();
+        System.out.println(calendar.getTime());
+    }
+ 
+    /**
+     * 处理日期 LocalDate
+     */
+    public static void test1(){
+        //获取当前日期   2017-11-06
+        LocalDate today = LocalDate.now();
+        System.out.println(today);
+ 
+        //构造日期   2017-10-08
+        LocalDate today2 = LocalDate.of(2017,10,8);
+        System.out.println(today2);
+ 
+        //构造日期   2017-02-22    字符串严格按照yyyy-MM-dd
+        LocalDate today3 = LocalDate.parse("2017-02-22");
+        System.out.println(today3);
+ 
+        //本月第一天  2017-11-01
+        LocalDate firstDayOfMonth = today.with(TemporalAdjusters.firstDayOfMonth());
+        System.out.println(firstDayOfMonth);
+        //本月第二天  2017-11-02   第n天
+        LocalDate secondDayOfMonth = today.withDayOfMonth(2);
+        System.out.println(secondDayOfMonth);
+ 
+        //本月最后一天 2017-02-28  方便解决任何年份的二月份多少天
+        LocalDate lastDayOfMonth = today3.with(TemporalAdjusters.lastDayOfMonth());
+        System.out.println(lastDayOfMonth);
+ 
+ 
+        //获取2017年12月的第一个周一   2017-12-04
+        LocalDate firstDayOf201712 = LocalDate.parse("2017-12-01").with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
+        System.out.println(firstDayOf201712);
+ 
+    }
+ 
+    /**
+     * 处理时间  LocalTime
+     */
+    public static void test2(){
+        //获取当前时间  含有毫秒值  17:18:41.571
+        LocalTime now = LocalTime.now();
+        System.out.println(now);
+ 
+        //获取当前时间   去掉毫秒值   17:45:41
+        LocalTime now1 = LocalTime.now().withNano(0);
+        System.out.println(now1);
+        //00:46:46.651  提供了把时分秒都设为0的方法
+        LocalTime now2 = LocalTime.now().withHour(0);
+        System.out.println(now2);
+ 
+        //构造时间  00:20:55
+        LocalTime time1 = LocalTime.of(0,20,55);
+        System.out.println(time1);
+        //构造时间  05:43:22
+        LocalTime time2 = LocalTime.parse("05:43:22");
+        System.out.println(time2);
+ 
+ 
+        //标准时间 2017-11-06T17:53:15.930
+        LocalDateTime lt = LocalDateTime.now();
+        System.out.println(lt);
+    }
+}
