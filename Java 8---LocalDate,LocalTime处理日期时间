@@ -6,12 +6,6 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
  
 /**
- * Created by lightClouds917
- * Date 2017/11/6
- * Description:Java8中处理时间和日期的类
- *
- SQL  -> Java
- --------------------------
  date -> LocalDate
  time -> LocalTime
  timestamp -> LocalDateTime
